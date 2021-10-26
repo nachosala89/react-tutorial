@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 
 const TodosList = (props) => {
   const { todos } = props;
+  return (
     <ul>
       {todos.map((todo) => (
         <TodoItem
@@ -13,6 +15,19 @@ const TodosList = (props) => {
           setUpdate={props.setUpdate}
         />
       ))}
-    </ul>;
+    </ul>
+  );
 };
+
+TodosList.propTypes = {
+  todos: PropTypes.arrayOf(PropTypes.shape({
+    completed: PropTypes.bool,
+    id: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
+  handleChangeProps: PropTypes.func.isRequired,
+  deleteTodoProps: PropTypes.func.isRequired,
+  setUpdate: PropTypes.func.isRequired,
+};
+
 export default TodosList;
